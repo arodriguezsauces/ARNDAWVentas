@@ -1,157 +1,401 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         8.0.30 - MySQL Community Server - GPL
--- SO del servidor:              Win64
--- HeidiSQL Versión:             12.1.0.6537
--- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 10-12-2025 a las 07:32:36
+-- Versión del servidor: 10.11.13-MariaDB-0ubuntu0.24.04.1
+-- Versión de PHP: 8.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de datos: `Ddata Base `
+--
 
--- Volcando estructura para tabla laragon_pos.cliente
-CREATE TABLE IF NOT EXISTS `cliente` (
-  `idcliente` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `direccion` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  PRIMARY KEY (`idcliente`)
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idcliente` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `direccion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla laragon_pos.cliente: ~0 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
 INSERT INTO `cliente` (`idcliente`, `nombre`, `telefono`, `direccion`) VALUES
-	(1, 'CLIENTE FRECUENTE', '00000000', '--------------------');
+(1, 'Ana Lopez', '978645132', 'Trujillo - Perú'),
+(2, 'Maria sanchez', '974561234', 'Trujillo - Perú'),
+(4, 'Nuevo Cliente', '97877789', 'Av. san martin n° 342'),
+(6, 'Registro de Cliente', '978978', 'Av. Libertad');
 
--- Volcando estructura para tabla laragon_pos.configuracion
-CREATE TABLE IF NOT EXISTS `configuracion` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `direccion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+-- --------------------------------------------------------
 
--- Volcando datos para la tabla laragon_pos.configuracion: ~1 rows (aproximadamente)
+--
+-- Estructura de tabla para la tabla `configuracion`
+--
+
+CREATE TABLE `configuracion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `telefono` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `direccion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `configuracion`
+--
+
 INSERT INTO `configuracion` (`id`, `nombre`, `telefono`, `email`, `direccion`) VALUES
-	(1, 'Sistemas Free - OPEN SOURCE', '98745698', 'ana.info1999@gamil.com', 'Trujillo');
+(1, 'Sistemas Free', '98745698', 'ana.info1999@gamil.com', 'Trujillo');
 
--- Volcando estructura para tabla laragon_pos.detalle_permisos
-CREATE TABLE IF NOT EXISTS `detalle_permisos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_permiso` int NOT NULL,
-  `id_usuario` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_permiso` (`id_permiso`),
-  KEY `id_usuario` (`id_usuario`),
-  CONSTRAINT `detalle_permisos_ibfk_1` FOREIGN KEY (`id_permiso`) REFERENCES `permisos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `detalle_permisos_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;;
+-- --------------------------------------------------------
 
--- Volcando datos para la tabla laragon_pos.detalle_permisos: ~0 rows (aproximadamente)
+--
+-- Estructura de tabla para la tabla `detalle_permisos`
+--
 
--- Volcando estructura para tabla laragon_pos.detalle_temp
-CREATE TABLE IF NOT EXISTS `detalle_temp` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `cantidad` int NOT NULL,
-  `descuento` decimal(10,2) NOT NULL DEFAULT '0.00',
+CREATE TABLE `detalle_permisos` (
+  `id` int(11) NOT NULL,
+  `id_permiso` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_permisos`
+--
+
+INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
+(35, 3, 9),
+(36, 4, 9),
+(37, 5, 9),
+(38, 6, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_temp`
+--
+
+CREATE TABLE `detalle_temp` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
   `precio_venta` decimal(10,2) NOT NULL,
-  `total` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_producto` (`id_producto`),
-  CONSTRAINT `detalle_temp_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`codproducto`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `detalle_temp_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE
+  `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla laragon_pos.detalle_temp: ~0 rows (aproximadamente)
+-- --------------------------------------------------------
 
--- Volcando estructura para tabla laragon_pos.detalle_venta
-CREATE TABLE IF NOT EXISTS `detalle_venta` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_producto` int NOT NULL,
-  `id_venta` int NOT NULL,
-  `cantidad` int NOT NULL,
+--
+-- Estructura de tabla para la tabla `detalle_venta`
+--
+
+CREATE TABLE `detalle_venta` (
+  `id` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_venta` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
   `precio` decimal(10,2) NOT NULL,
-  `total` decimal(10,2) NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`id`),
-  KEY `id_producto` (`id_producto`),
-  KEY `id_venta` (`id_venta`),
-  CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`codproducto`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;;
+  `total` decimal(10,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla laragon_pos.detalle_venta: ~0 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `detalle_venta`
+--
 
--- Volcando estructura para tabla laragon_pos.permisos
-CREATE TABLE IF NOT EXISTS `permisos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;;
+INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `cantidad`, `descuento`, `precio`, `total`) VALUES
+(1, 1, 1, 10, 200.00, 1500.00, 14800.00),
+(2, 2, 1, 2, 100.00, 800.00, 1500.00),
+(3, 2, 2, 15, 0.00, 800.00, 12000.00),
+(4, 1, 3, 5, 50.00, 1500.00, 7450.00),
+(5, 2, 3, 1, 10.00, 800.00, 790.00),
+(6, 3, 3, 2, 100.00, 500.00, 900.00),
+(7, 3, 4, 9, 300.00, 500.00, 17700.00),
+(8, 4, 4, 2, 150.00, 3000.00, 5850.00),
+(9, 5, 5, 8, 100.00, 350.00, 2700.00),
+(10, 4, 5, 1, 200.00, 3000.00, 2800.00),
+(11, 1, 6, 1, 50.00, 1500.00, 1450.00),
+(12, 4, 6, 3, 520.00, 3000.00, 8480.00),
+(13, 3, 6, 1, 0.00, 500.00, 500.00),
+(14, 4, 7, 3, 10.00, 3000.00, 8990.00),
+(15, 4, 8, 5, 0.00, 3000.00, 15000.00);
 
--- Volcando datos para la tabla laragon_pos.permisos: ~6 rows (aproximadamente)
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permisos`
+--
+
+CREATE TABLE `permisos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
 INSERT INTO `permisos` (`id`, `nombre`) VALUES
-	(1, 'configuración'),
-	(2, 'usuarios'),
-	(3, 'clientes'),
-	(4, 'productos'),
-	(5, 'ventas'),
-	(6, 'nueva_venta');
+(1, 'configuración'),
+(2, 'usuarios'),
+(3, 'clientes'),
+(4, 'productos'),
+(5, 'ventas'),
+(6, 'nueva_venta');
 
--- Volcando estructura para tabla laragon_pos.producto
-CREATE TABLE IF NOT EXISTS `producto` (
-  `codproducto` int NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `descripcion` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `codproducto` int(11) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `existencia` int NOT NULL,
-  PRIMARY KEY (`codproducto`)
+  `existencia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
--- Volcando datos para la tabla laragon_pos.producto: ~0 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `producto`
+--
 
--- Volcando estructura para tabla laragon_pos.usuario
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `idusuario` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `correo` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `usuario` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `clave` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  PRIMARY KEY (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `existencia`) VALUES
+(1, '123456', 'Televisor Lg', 1500.00, 34),
+(2, '13256445', 'Celular Lg', 800.00, 2),
+(3, '97879846', 'Impresora epson L300', 500.00, 3),
+(4, '978798', 'Computadora Lenovo', 3000.00, 36),
+(5, '7977989', 'Scanner', 350.00, 4),
+(6, '78879978', 'Arroz Trujillo', 15.00, 60);
 
--- Volcando datos para la tabla laragon_pos.usuario: ~2 rows (aproximadamente)
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idusuario` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `usuario` varchar(20) NOT NULL,
+  `clave` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
 INSERT INTO `usuario` (`idusuario`, `nombre`, `correo`, `usuario`, `clave`) VALUES
-	(1, 'Sistemas Free', 'ana.info1999@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b');
+(1, 'Sistemas Free', 'ana.info1999@gmail.com', 'admin', '827ccb0eea8a706c4c34a16891f84e7b'),
+(9, 'Maria Sanchez', 'maria@gmail.com', 'maria', '263bce650e68ab4e23f28263760b9fa5');
 
--- Volcando estructura para tabla laragon_pos.ventas
-CREATE TABLE IF NOT EXISTS `ventas` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_cliente` int NOT NULL,
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
   `total` decimal(10,2) NOT NULL,
-  `id_usuario` int NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `estado` int DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_cliente` (`id_cliente`),
-  CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;;
+  `id_usuario` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla laragon_pos.ventas: ~0 rows (aproximadamente)
+--
+-- Volcado de datos para la tabla `ventas`
+--
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
+(1, 1, 16300.00, 1, '2021-08-09 21:01:45'),
+(2, 1, 12000.00, 1, '2021-08-09 21:05:02'),
+(3, 1, 9140.00, 1, '2021-08-09 21:10:23'),
+(4, 1, 23550.00, 1, '2021-08-10 01:09:24'),
+(5, 2, 5500.00, 1, '2021-08-10 01:25:27'),
+(6, 1, 10430.00, 1, '2021-08-10 21:27:09'),
+(7, 1, 8990.00, 9, '2021-08-10 21:31:50'),
+(8, 2, 15000.00, 1, '2025-12-10 06:30:25');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idcliente`);
+
+--
+-- Indices de la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `detalle_permisos`
+--
+ALTER TABLE `detalle_permisos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_permiso` (`id_permiso`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `detalle_temp`
+--
+ALTER TABLE `detalle_temp`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_producto` (`id_producto`);
+
+--
+-- Indices de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `id_venta` (`id_venta`);
+
+--
+-- Indices de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`codproducto`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idusuario`);
+
+--
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_cliente` (`id_cliente`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `configuracion`
+--
+ALTER TABLE `configuracion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_permisos`
+--
+ALTER TABLE `detalle_permisos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_temp`
+--
+ALTER TABLE `detalle_temp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `codproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `detalle_permisos`
+--
+ALTER TABLE `detalle_permisos`
+  ADD CONSTRAINT `detalle_permisos_ibfk_1` FOREIGN KEY (`id_permiso`) REFERENCES `permisos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_permisos_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `detalle_temp`
+--
+ALTER TABLE `detalle_temp`
+  ADD CONSTRAINT `detalle_temp_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`codproducto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_temp_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`codproducto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`idcliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
